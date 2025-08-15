@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     # Application settings
     DEBUG: bool = False
     SECRET_KEY: Optional[str] = None
-
+    ALGORITHM:str
     model_config = {
         "env_file": PROJECT_ROOT / ".env",
         "env_file_encoding": "utf-8",

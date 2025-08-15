@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from app.models.user import User
 from app.schema.user import UserCreate, UserUpdate
 from datetime import datetime, timezone
-
+from app.utils.auth_utils import get_password_hash
 
 async def get_users(session: AsyncSession):
     query = select(User)
@@ -43,7 +43,7 @@ async def create_user(session: AsyncSession, user: UserCreate):
     db_user = User(
         username=user.username,
         email=user.email,
-        password=user.password
+        password=get_password_hash(user.password)
     )
     session.add(db_user)
     await session.commit()
